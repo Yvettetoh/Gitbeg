@@ -1,0 +1,39 @@
+#Inspect Pod Status
+kubectl get pods -n <namespace>
+#Get detailed information about the pod to understand why it's not running.
+kubectl describe pod <pod-name> -n <namespace>
+#Inspect the logs of the pod's containers, even if they have crashed or failed to start.
+kubectl logs <pod-name> -n <namespace>
+# For previous terminated container logs
+kubectl logs <pod-name> -n <namespace> --previous
+#Resource Quotas: Check if there are resource quotas and if the pod is being throttled or pending due to resource constraints.
+kubectl describe quota -n <namespace>
+#Ensure the nodes have enough CPU, memory, and disk space.
+kubectl describe node <node-name>
+#Analyze the pod's configuration to identify any misconfigurations.
+kubectl get pod <pod-name> -n <namespace> -o yaml
+#Ensure that the security context or service account associated with the pod does not restrict its execution.
+kubectl describe sa <service-account-name> -n <namespace>
+kubectl describe psp
+#Ensure network policies are not preventing the pod from communicating with the Kubernetes API server or other necessary services.
+kubectl get networkpolicy -n <namespace>
+#Check the logs and status of the init containers specifically.
+kubectl logs <pod-name> -c <init-container-name> -n <namespace>
+#Ensure that the node on which the pod is scheduled is in a Ready state.
+kubectl get nodes
+# Check for events in the namespace that might be related to the pod failure.
+kubectl get events -n <namespace>
+#Ensure persistent volumes (PV) and persistent volume claims (PVC) are bound and accessible.
+kubectl get pv,pvc -n <namespace>
+#Check if a higher-level controller (like a Deployment) is managing the pod and whether there are issues in the rollout.
+kubectl describe deployment <deployment-name> -n <namespace>
+
+
+
+
+
+
+
+
+
+
